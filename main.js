@@ -7,7 +7,7 @@ const cheerio = require("cheerio");
 //link of the first 3 random topics of the github
 let url = "https://github.com/topics";
 
-//const getReposPageHtml = require("./reposPage");
+const getReposPageHtml = require("./reposPage");
 
 request(url, cb);
 function cb(err, response, html) {
@@ -17,6 +17,7 @@ function cb(err, response, html) {
     console.log("page not found");
   } else {
     getTopicLinks(html);
+    console.log("Done");
   }
 }
 function getTopicLinks(html) {
@@ -26,6 +27,7 @@ function getTopicLinks(html) {
     let href = $(linkElemArr[i]).attr("href");
     let topic = href.split("/").pop();
     let fullLink = `https://github.com${href}`;
-    //getReposPageHtml(fullLink, topic);
+    // console.log(fullLink);
+    getReposPageHtml.getReposPageHtml(fullLink, topic);
   }
 }
